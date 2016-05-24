@@ -1,0 +1,32 @@
+#pragma config(Motor, port2, driveLeftMotor, tmotorServoContinuousRotation, openLoop)
+#pragma config(Motor, port5, driverightMotor, tmotorServoContinuousRotation, openLoop, reversed)
+
+#pragma platform(VEX)
+#pragma competitionControl(Competition)
+#pragma autonomousDuration(15)
+#pragma userControlDuration(145)
+
+#include "Vex_Competition_Includes.c"
+
+void pre_auton()
+{
+  bStopTasksBetweenModes = true;
+}
+
+task autonomous()
+{
+	motor[driverightMotor] = 127;
+	motor[driveleftMotor] = 127;
+	wait1Msec(5000);
+	motor[driverightMotor] = 0;
+	motor[driveleftMotor] = 0;	
+}
+
+task usercontrol()
+{
+	while (true)
+	{
+		motor[driverightMotor]=vexRT[Ch2];
+		motor[driveleftMotor]=vexRT[Ch3];
+	}
+}
